@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 
+const authorization = require("../middleware/token_auth.js")
+
 const User = require("./models/User.js");
 const UserProfile = require("./models/UserProfile.js");
 const e = require('express');
@@ -68,5 +70,21 @@ router.post("/signin", async (req, res) => {
         res.status(500).json({message: 'Server error during signin'});
     }
 });
+
+router.get("/profile", authorization, async (req,res)=>{
+    try{
+        const userEmail = req.user.email;
+        const userProfile = await UserProfile.findOne(userEmail);
+
+        if (!userProfile){
+            return res(404).json({message: "User not found"});
+        }
+
+        return res.json({userProfile});
+    }catch (error){
+        console.log("Error fetching profile", error);
+        res.status(500).json({message: "Server error"});
+    }
+})
 
 module.exports = router;

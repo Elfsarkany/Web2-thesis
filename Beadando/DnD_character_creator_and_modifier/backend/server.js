@@ -21,13 +21,17 @@ mongoose.connect(process.env.MONGODB_URL, {
     console.error("Database connection error:", err);
 })
 
+
+const userRoute = require("./routes/userRoute");
+const characterRoute = require("./routes/characterRoute");
+
+
+
+app.use("/api/user", userRoute);
+app.use("/api/character", characterRoute);
+
+
+
 app.listen(PORT, ()=>{
     console.log('Linstening on: ' + PORT);
 }, );
-
-//const userRoute = require('./routes/userRoute');
-//const characterRoute = require('./routes/characterRoute');
-
-
-
-//app.use("/api/auth", userRoute);

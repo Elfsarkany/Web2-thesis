@@ -1,0 +1,22 @@
+<p>login works!</p>
+<div class="auth-container">
+    <h2>Login</h2>
+
+    <form (submit)="onSignIn()">
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required="required" [(ngModel)]="signInData.email">
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required="required" [(ngModel)]="signInData.password">
+        </div>
+
+        <button type="submit">Sign in</button>
+
+    </form>
+
+    <p class="error" *ngIf='errorMessage'>{{errorMessage}}</p>
+    
+    <p>Don't have an account? <a routerLink="/user/signup">Sign up here!</a></p>
+</div>
