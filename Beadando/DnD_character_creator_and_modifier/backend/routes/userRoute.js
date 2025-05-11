@@ -7,7 +7,6 @@ const authorization = require("../middleware/token_auth.js")
 
 const User = require("./models/User.js");
 const UserProfile = require("./models/UserProfile.js");
-const e = require('express');
 
 router.post("/signup", async (req, res) => {
     try{
