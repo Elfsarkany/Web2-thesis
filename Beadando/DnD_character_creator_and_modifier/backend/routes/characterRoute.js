@@ -43,11 +43,11 @@ router.post("/create", Authorization, async (req, res) => {
 
 router.get("/fetch/:id", Authorization, async (req, res) => {
     try{
-        const character = Character.where("owner").equals(req.user.email).findById(req.params.id).exec();
+        const character = Character.where('owner').equals(req.user.email).findById(req.params.id).exec();
         if (character){
         res.status(200).json(character);
         }else{
-            res.status(400).json({message: "Character not found!"});
+            res.status(400).json({message: 'Character not found!'});
         }
 
     } catch (error){
@@ -56,5 +56,53 @@ router.get("/fetch/:id", Authorization, async (req, res) => {
     }
 });
 
+router.get("/fetchall", Authorization, async (req, res) => {
+    try{
+        const chs = Character.find().where('owner').equals(req.user.email).exec();
+        res.status(200).json({message: 'Characters fecthed sucessfully.', characters: chs});
+    } catch (error){
+        console.error('Error during characters fetch', error);
+        res.status(500).json({message: 'Server error during characters fetch'});
+    }
+});
+
+router.put("/update/:id", Authorization, async (req, res) => {
+    try{
+        const character  = new Character({
+            _id: req.body._id,
+            owner: req.user.email,
+            name: req.body.name,
+            background: req.body.background,
+            lineage: req.body.lineage,
+            class: req.body.class,
+            subClass: req.body.subClass,
+            level: req.body.level,
+            baseStats: req.body.baseStats,
+            stats: req.body.stats,
+            proficiencis: req.body.proficiencis,
+            expertises: req.body.expertises,
+            feats: req.body.feats,
+            visions: req.body.visions,
+            chosenSpells: req.body.chosenSpells,
+            items: req.body.items,
+            biography: req.body.biography,
+        });
+        await character.updateOne({_id: req.params.id, owner: req.user.email}, car).exec();
+        res.status(200).json({message: 'Character updated succesfully.'});
+    } catch (error){
+        console.error('Error during character update', error);
+        res.status(500).json({message: 'Server error during character update'});
+    }
+});
+
+router.delete("/delete/:id", Authorization, async (req, res) => {
+    try{
+        await Character.deleteOne({_id: req.params.id, owner: req.user.email});
+        res.status(200).json({message: 'Character deleted sucessfully.'});
+    } catch (error){
+        console.error('Error during character deletion', error);
+        res.status(500).json({message: 'Server error during character deletion'});
+    }
+});
 
 module.exports = router;
