@@ -5,13 +5,24 @@ const characterSchema = new mongoose.Schema({
     name: {type: String, required: true},
     background: {type: String, required: true},
     lineage: {type: String, required: true},
-    baseStats: {type: String, required: true},
-    stats: {type: String, required: true},
-    proficiencis: {type: String},
-    feats: {type: String},
-    chosenSpells: {type: String},
-    items: {type: String},
-    biography: {type: String, required: true},
+    class: {type: String, required: true},
+    subClass: {type: String},
+    level: {type: Number, min:1, max:20, required: true},
+    baseStats: {type: [Number], required: true},
+    stats: {type: [Number], required: true},
+    proficiencis: {type: [Boolean]},
+    expertises: {type: [Boolean]},
+    feats: {type: [String]},
+    visions: {type: [Number]},
+    chosenSpells: {type: [String]},
+    items: {type: [String]},
+    biography: {
+        name: {type: String},
+        age: {type: String},
+        alignment: {type: String},
+        description: {type: String},
+        required: true
+    },
 });
 
 module.exports = mongoose.model("Character", characterSchema);
