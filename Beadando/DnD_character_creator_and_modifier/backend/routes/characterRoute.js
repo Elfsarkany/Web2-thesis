@@ -43,7 +43,7 @@ router.post("/create", Authorization, async (req, res) => {
 
 router.get("/fetch/:id", Authorization, async (req, res) => {
     try{
-        const character = Character.findById(req.params.id);
+        const character = Character.where("owner").equals(req.user.email).findById(req.params.id).exec();
         if (character){
         res.status(200).json(character);
         }else{
