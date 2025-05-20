@@ -15,7 +15,7 @@ const SubClass = require("../models/SubClass.js")
 router.post("/create", Authorization, async (req, res) => {
     try{
         const character  = new Character({
-            owner: req.body.owner, 
+            owner: req.user.email,
             name: req.body.name,
             background: req.body.background,
             lineage: req.body.lineage,
@@ -27,6 +27,7 @@ router.post("/create", Authorization, async (req, res) => {
             proficiencis: req.body.proficiencis,
             expertises: req.body.expertises,
             feats: req.body.feats,
+            visions: req.body.visions,
             chosenSpells: req.body.chosenSpells,
             items: req.body.items,
             biography: req.body.biography,

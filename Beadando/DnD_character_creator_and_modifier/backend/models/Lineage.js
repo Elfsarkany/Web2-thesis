@@ -5,8 +5,8 @@ const lineageSchema = new mongoose.Schema({
     publication:{type: String, required: true},
     origin: {type: String, required: true},
     statBonuses: {type: [Number], required: true},
-    proficiencis: {type: [String], required: true},
-    feat: {type: String},
+    proficiencis: {type: [Boolean], required: true},
+    feats: {type: [Feat]},
     visions: {type: [Number], required},
     description: {type: String, required: true},
 });
