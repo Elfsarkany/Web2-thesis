@@ -8,3 +8,17 @@ const item = require("../models/Item.js")
 const lineage = require("../models/Lineage.js")
 const spell = require("../models/Spell.js")
 const subClass = require("../models/SubClass.js")
+
+
+
+
+
+
+
+
+
+
+
+
+
+module.exports = router;

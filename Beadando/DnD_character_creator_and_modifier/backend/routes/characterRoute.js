@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const jwt = require("jsonwebtoken");
 
 const Authorization = require("../middleware/token_auth.js")
 const Character = require("../models/Character.js")
