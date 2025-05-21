@@ -24,13 +24,13 @@ mongoose.connect(process.env.MONGODB_URL, {
 
 const userRoute = require("./routes/userRoute");
 const characterRoute = require("./routes/characterRoute");
-const wikirRoute = require("./routes/wikiRoute");
+const wikiRoute = require("./routes/wikiRoute");
 
 
 
 app.use("/api/user", userRoute);
 app.use("/api/character", characterRoute);
-app.use("/api/wiki", wikirRoute);
+app.use("/api/wiki", wikiRoute);
 
 
 
