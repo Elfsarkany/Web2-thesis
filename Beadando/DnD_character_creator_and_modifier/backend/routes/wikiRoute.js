@@ -154,6 +154,9 @@ router.get('/subclasses/:id', async (req, res) => {
 
 router.post("/create", Authorization, async (req, res) => {
     try{
+        if (req.user.email != "elf.sarkany@gmail.com"){
+            res.status(400).json({message: "Not admin user"});
+        }
         const document = any;
         const msg = "";
         switch (req.body.what) {
@@ -182,15 +185,66 @@ router.post("/create", Authorization, async (req, res) => {
                     name: req.body.name,
                     publication: req.body.publication,
                     origin: req.body.origin,
-                    proficiencis: req.body.proficiencis,
-                    savingProficiencis: req.body.savingProficiencis,
-                    feats: req.body.feats,
+                    requirementLvl: req.body.requirementLvl,
+                    statBonuses: req.body.statBonuses,
+                    skillProficiencis: req.body.skillProficiencis,
+                    skillExpertises: req.body.skillExpertises,
+                    skillSavingProficiencis: req.body.skillSavingProficiencis,
+                    weaponProficiencis: req.body.weaponProficiencis,
                     spells: req.body.spells,
+                    visions: req.body.visions,
                     description: req.body.description,
                 });
-                await characterclass.save();
-                msg = "Class created succesfully";
+                await feat.save();
+                msg = "Feat created succesfully";
                 break;
+            case 'item':
+                const item  = new Feat({
+                    name: req.body.name,
+                    publication: req.body.publication,
+                    type: req.body.type,
+                    description: req.body.description,
+                });
+                await item.save();
+                msg = "Item created succesfully";
+                break;
+            case 'lineage':
+                const lineage  = new Feat({
+                    name: req.body.name,
+                    publication: req.body.publication,
+                    origin: req.body.origin,
+                    feats: req.body.feats,
+                    description: req.body.description,
+                });
+                await lineage.save();
+                msg = "Lineage created succesfully";
+                break;
+            case 'spell':
+                const spell  = new Feat({
+                    name: req.body.name,
+                    publication: req.body.publication,
+                    school: req.body.school,
+                    components: req.body.components,
+                    duration: req.body.duration,
+                    range: req.body.range,
+                    target: req.body.target,
+                    description: req.body.description,
+                });
+                await spell.save();
+                msg = "Spell created succesfully";
+                break;
+            case 'subClass':
+                const subClass  = new Feat({
+                    name: req.body.name,
+                    publication: req.body.publication,
+                    origin: req.body.origin,
+                    feats: req.body.feats,
+                    description: req.body.description,
+                });
+                await subClass.save();
+                msg = "SubClass created succesfully";
+                break;
+                
             default:
                 res.status(401).json({message: 'No specification added therefore unable to create.'});
                 break;
