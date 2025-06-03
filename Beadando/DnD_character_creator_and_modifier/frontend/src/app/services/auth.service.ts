@@ -21,9 +21,9 @@ export class AuthService {
     return this.http.post<{token: string}>(`${environment.apiUrl}/api/user/signin`, body);
   }
 
-  signOut(email: string, password:string){
+  signOut(){
     localStorage.removeItem('token');
-    this.router.navigate(['/signIn']);
+    this.router.navigate(['/signin']);
   }
 
   isSignedIn(){

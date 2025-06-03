@@ -1,1 +1,13 @@
-<p>profile works!</p>
+<div class="profile-container">
+    <h2>Profile</h2>
+    <div *ngIf="userData; else loadingOrError">
+        <p><strong>Email:</strong> {{userData.email}} </p>
+        <p><strong>User name:</strong> {{userData.username}} </p>
+        <p><strong>Profile picture:</strong> {{userData.profilePicture}} </p>
+        <button (click)="onLogout()">Logout</button>
+    </div>
+    <ng-template #loadingOrError>
+        <p *ngIf="errorMessage">{{ errorMessage}} </p>
+        <p *ngIf="!errorMessage">Loading profile...</p>
+    </ng-template>
+</div>
