@@ -10,7 +10,7 @@ const UserProfile = require("./models/UserProfile.js");
 
 router.post("/signup", async (req, res) => {
     try{
-        const {email, password} = req.body;
+        const {email, password, profilename} = req.body;
 
         const existingUser = await User.findOne({email});
 
@@ -21,14 +21,10 @@ router.post("/signup", async (req, res) => {
         const newUser = new User({
             email,
             password: hashedPassword,
+            profilename,
         });
 
         await newUser.save();
-        const newUserProfile = new UserProfile({
-            email,
-            email,
-        });
-        await newUserProfile.save();
         
         res.status(201).json({message: 'User created succesfully.'});
     } catch (error){
@@ -61,9 +57,7 @@ router.post("/signin", async (req, res) => {
             expiresIn: '1h'
         });
 
-        const profile = await UserProfile.findOne({email});
-
-        res.json({token, profile});
+        res.json({token, user: {email: user.email, profilename: user.profilename}});
     } catch (error){
         console.error('Error during signin', error);
         res.status(500).json({message: 'Server error during signin'});
@@ -72,14 +66,14 @@ router.post("/signin", async (req, res) => {
 
 router.get("/profile", authorization, async (req,res)=>{
     try{
-        const userEmail = req.user.email;
-        const userProfile = await UserProfile.findOne(userEmail);
+        const userId = req.user.userId;
+        const user = await User.findById(userId).select("-password");
 
-        if (!userProfile){
+        if (!user){
             return res(404).json({message: "User not found"});
         }
 
-        return res.json({userProfile});
+        return res.json({user});
     }catch (error){
         console.log("Error fetching profile", error);
         res.status(500).json({message: "Server error"});

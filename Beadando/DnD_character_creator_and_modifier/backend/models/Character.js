@@ -19,7 +19,6 @@ const characterSchema = new mongoose.Schema({
         age: {type: String},
         alignment: {type: String},
         description: {type: String},
-        looks: {type: Image},
         required: true
     },
 });

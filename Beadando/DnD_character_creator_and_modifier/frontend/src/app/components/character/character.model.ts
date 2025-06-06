@@ -15,6 +15,5 @@ export interface Character {
         age: {type: String},
         alignment: {type: String},
         description: {type: String},
-        looks: {type: string}
   };
 }

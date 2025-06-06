@@ -15,6 +15,7 @@ export const routes: Routes = [
     {path: 'profile', component: ProfileComponent, canActivate: [authGuard]},
     {path: 'wiki', component: WikiListComponent},
     {path: 'wiki/create', component: WikiCreateComponent, canActivate: [authGuard]},
+    {path: 'wiki/edit/:id', component: WikiCreateComponent, canActivate: [authGuard]},
     {path: 'character', component: CharacterListComponent, canActivate: [authGuard]},
     {path: 'character/create', component: CharacterCreateComponent, canActivate: [authGuard]},
     {path: 'character/edit/:characterID', component: CharacterCreateComponent, canActivate: [authGuard]},

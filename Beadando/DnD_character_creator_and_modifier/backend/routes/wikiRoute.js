@@ -154,10 +154,6 @@ router.get('/subclasses/:id', async (req, res) => {
 
 router.post("/create", Authorization, async (req, res) => {
     try{
-        if (req.user.email != "elf.sarkany@gmail.com"){
-            res.status(400).json({message: "Not admin user"});
-        }
-        const document = any;
         const msg = "";
         switch (req.body.what) {
             case 'background':
@@ -199,7 +195,7 @@ router.post("/create", Authorization, async (req, res) => {
                 msg = "Feat created succesfully";
                 break;
             case 'item':
-                const item  = new Feat({
+                const item  = new Item({
                     name: req.body.name,
                     publication: req.body.publication,
                     weapontype: req.body.type,
@@ -209,7 +205,7 @@ router.post("/create", Authorization, async (req, res) => {
                 msg = "Item created succesfully";
                 break;
             case 'lineage':
-                const lineage  = new Feat({
+                const lineage  = new Lineage({
                     name: req.body.name,
                     publication: req.body.publication,
                     origin: req.body.origin,
@@ -220,7 +216,7 @@ router.post("/create", Authorization, async (req, res) => {
                 msg = "Lineage created succesfully";
                 break;
             case 'spell':
-                const spell  = new Feat({
+                const spell  = new Spell({
                     name: req.body.name,
                     publication: req.body.publication,
                     school: req.body.school,
@@ -234,7 +230,7 @@ router.post("/create", Authorization, async (req, res) => {
                 msg = "Spell created succesfully";
                 break;
             case 'subClass':
-                const subClass  = new Feat({
+                const subClass  = new Subclass({
                     name: req.body.name,
                     publication: req.body.publication,
                     origin: req.body.origin,

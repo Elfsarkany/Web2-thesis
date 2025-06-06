@@ -11,14 +11,14 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
 
-  signUp(email: string, password:string){
-    const body = {email, password};
-    return this.http.post(`${environment.apiUrl}/api/user/signup`, body);
+  signUp(email: string, password:string, profilename:string){
+    const body = {email, password, profilename};
+    return this.http.post(`${environment.apiUrl}/user/signup`, body);
   }
 
   signIn(email: string, password:string){
     const body = {email, password};
-    return this.http.post<{token: string}>(`${environment.apiUrl}/api/user/signin`, body);
+    return this.http.post<{token: string}>(`${environment.apiUrl}/user/signin`, body);
   }
 
   signOut(){

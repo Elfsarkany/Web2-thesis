@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './signup.component.css'
 })
 export class SignupComponent {
-  signupData = {email: '', password: ''};
+  signupData = {email: '', password: '', profilename: ''};
   successMessage = '';
   errorMessage = '';
 
@@ -21,12 +21,12 @@ export class SignupComponent {
     this.successMessage = '';
     this.errorMessage = '';
 
-    const {email, password} = this.signupData;
-    this.authService.signUp(email, password).subscribe({
+    const {email, password, profilename} = this.signupData;
+    this.authService.signUp(email, password, profilename).subscribe({
       next:()=>{
         this.successMessage = 'Registration successful! Please login.';
 
-        this.signupData = {email: '', password: ''};
+        this.signupData = {email: '', password: '', profilename: ''};
       },
       error:(err)=>{
         this.errorMessage = err.error?.message || 'Sign up failed. Please try again.'

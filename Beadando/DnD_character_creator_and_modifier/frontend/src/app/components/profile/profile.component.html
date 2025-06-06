@@ -2,8 +2,7 @@
     <h2>Profile</h2>
     <div *ngIf="userData; else loadingOrError">
         <p><strong>Email:</strong> {{userData.email}} </p>
-        <p><strong>User name:</strong> {{userData.username}} </p>
-        <p><strong>Profile picture:</strong> {{userData.profilePicture}} </p>
+        <p><strong>Profile name:</strong> {{userData.profilename}} </p>
         <button (click)="onLogout()">Logout</button>
     </div>
     <ng-template #loadingOrError>
