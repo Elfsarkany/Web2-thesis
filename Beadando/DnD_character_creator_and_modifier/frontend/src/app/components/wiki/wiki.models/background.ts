@@ -1,10 +1,9 @@
 import { Feat } from "./feat";
 
-export interface CharacterClass{
+export interface Background{
     id: string;
     name: string;
     publication: string;
     feats: Feat[];
     description: string;
-    
 }

@@ -202,7 +202,7 @@ router.post("/create", Authorization, async (req, res) => {
                 const item  = new Feat({
                     name: req.body.name,
                     publication: req.body.publication,
-                    type: req.body.type,
+                    weapontype: req.body.type,
                     description: req.body.description,
                 });
                 await item.save();

@@ -1,10 +1,10 @@
 import { Feat } from "./feat";
 
-export interface CharacterClass{
+export interface Lineage{
     id: string;
     name: string;
     publication: string;
-    feats: Feat[];
+    origin: string;
+    feats: Feat;
     description: string;
-    
 }
